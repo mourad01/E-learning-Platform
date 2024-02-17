@@ -1,11 +1,10 @@
 package com.jobintech.elearningjobintech.Controller;
 
 import com.jobintech.elearningjobintech.entities.Users;
+import com.jobintech.elearningjobintech.dto.UserDTO;
 import com.jobintech.elearningjobintech.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,13 +26,13 @@ public class UserController {
     }
 
     @GetMapping  ("/findall")
-    public List<Users> allUsers(){
+    public List<UserDTO> allUsers(){
 
         return userService.findAll() ;
     }
     @GetMapping("/find/{id}")
-    public ResponseEntity<Users> findUser(@PathVariable Long id){
-        Users user = userService.findById(id);
+    public ResponseEntity<UserDTO> findUser(@PathVariable Long id){
+        UserDTO user = userService.findById(id);
         if(user!=null){
             return new ResponseEntity<>(user, HttpStatus.OK);
         }

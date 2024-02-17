@@ -4,6 +4,7 @@ import com.jobintech.elearningjobintech.entities.Parcour;
 import com.jobintech.elearningjobintech.entities.Users;
 import com.jobintech.elearningjobintech.repositories.IParcourRep;
 import com.jobintech.elearningjobintech.repositories.IUserRepo;
+import org.junit.Test;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @SpringBootApplication
 public class ELearningJobInTechApplication {
@@ -19,7 +21,9 @@ public class ELearningJobInTechApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(ELearningJobInTechApplication.class, args);
+
     }
+
     @Bean
     CommandLineRunner commandLineRunner(IParcourRep parcourRep, IUserRepo userRepo){
         return args -> {
