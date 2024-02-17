@@ -27,4 +27,16 @@ public class Steps {
     nullable = false)
     private Parcour parcour;
 
+    public Steps(String title, String description, String status) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Steps(String title, String description, String status, Parcour parcour) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.parcour = parcour;
+    }
 }
