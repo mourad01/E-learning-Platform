@@ -1,6 +1,7 @@
 package com.jobintech.elearningjobintech.services;
 
 import com.jobintech.elearningjobintech.dto.User.UserRegisteration;
+import com.jobintech.elearningjobintech.dto.User.UserUpdateReq;
 import com.jobintech.elearningjobintech.entities.Users;
 import com.jobintech.elearningjobintech.dto.User.UserDTO;
 import com.jobintech.elearningjobintech.mapper.UserDtoMapper;
@@ -26,12 +27,13 @@ public class UserService {
         this.userRegistrartionMapper = userRegistrartionMapper;
     }
 
-    public Users UpdateUser(Long id, Users users) {
-        Users user = userRepo.findById(id).orElse(null);
+    public Users UpdateUser(Long id, UserUpdateReq users) {
+        Users user = userRepo.getReferenceById(id);
         if (user != null) {
-            users = user;
+            user.setUsername(users.username());
+            user.setRole(users.role());
         }
-        return userRepo.save(users);
+        return userRepo.save(user);
     }
 
     public Users saveOrUpdate(UserRegisteration userRegisteration) {

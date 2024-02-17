@@ -1,7 +1,6 @@
 package com.jobintech.elearningjobintech.dto.User;
 
-import com.jobintech.elearningjobintech.dto.ParcourDTO;
-import com.jobintech.elearningjobintech.entities.Parcour;
+import com.jobintech.elearningjobintech.dto.parcour.ParcourDTO;
 
 import java.util.List;
 

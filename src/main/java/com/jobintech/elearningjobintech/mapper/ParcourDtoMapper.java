@@ -1,6 +1,6 @@
 package com.jobintech.elearningjobintech.mapper;
 
-import com.jobintech.elearningjobintech.dto.ParcourDTO;
+import com.jobintech.elearningjobintech.dto.parcour.ParcourDTO;
 import com.jobintech.elearningjobintech.entities.Parcour;
 import org.springframework.stereotype.Service;
 

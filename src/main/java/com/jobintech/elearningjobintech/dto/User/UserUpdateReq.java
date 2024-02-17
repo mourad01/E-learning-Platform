@@ -1,4 +1,4 @@
 package com.jobintech.elearningjobintech.dto.User;
 
-public record UserUpdateReq() {
+public record UserUpdateReq(String username ,  String role) {
 }

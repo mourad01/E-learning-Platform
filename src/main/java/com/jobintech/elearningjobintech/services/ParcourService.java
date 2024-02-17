@@ -1,10 +1,9 @@
 package com.jobintech.elearningjobintech.services;
 
-import com.jobintech.elearningjobintech.dto.ParcourDTO;
+import com.jobintech.elearningjobintech.dto.parcour.ParcourDTO;
 import com.jobintech.elearningjobintech.entities.Parcour;
 import com.jobintech.elearningjobintech.mapper.ParcourDtoMapper;
 import com.jobintech.elearningjobintech.repositories.IParcourRep;
-import com.jobintech.elearningjobintech.tools.ServicesCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;

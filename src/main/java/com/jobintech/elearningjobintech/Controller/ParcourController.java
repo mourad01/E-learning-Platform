@@ -1,6 +1,6 @@
 package com.jobintech.elearningjobintech.Controller;
 
-import com.jobintech.elearningjobintech.dto.ParcourDTO;
+import com.jobintech.elearningjobintech.dto.parcour.ParcourDTO;
 import com.jobintech.elearningjobintech.entities.Parcour;
 import com.jobintech.elearningjobintech.services.ParcourService;
 import org.springframework.http.HttpStatus;
