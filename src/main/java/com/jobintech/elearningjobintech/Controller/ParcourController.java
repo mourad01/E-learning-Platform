@@ -1,5 +1,6 @@
 package com.jobintech.elearningjobintech.Controller;
 
+import com.jobintech.elearningjobintech.dto.ParcourDTO;
 import com.jobintech.elearningjobintech.entities.Parcour;
 import com.jobintech.elearningjobintech.services.ParcourService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class ParcourController {
     }
 
     @GetMapping("/findall")
-    public ResponseEntity<List<Parcour>>allParcours(){
+    public ResponseEntity<List<ParcourDTO>>allParcours(){
         return new ResponseEntity<>(parcourService.findAll() , HttpStatus.OK);
     }
     @GetMapping("/find/{id}")

@@ -1,6 +1,8 @@
 package com.jobintech.elearningjobintech.services;
 
+import com.jobintech.elearningjobintech.dto.ParcourDTO;
 import com.jobintech.elearningjobintech.entities.Parcour;
+import com.jobintech.elearningjobintech.mapper.ParcourDtoMapper;
 import com.jobintech.elearningjobintech.repositories.IParcourRep;
 import com.jobintech.elearningjobintech.tools.ServicesCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,24 +10,33 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
-public class ParcourService implements ServicesCRUD<Parcour> {
+public class ParcourService  {
     @Autowired
     IParcourRep parcourRep;
+    private final ParcourDtoMapper parcourDtoMapper;
+
+    public ParcourService( ParcourDtoMapper parcourDtoMapper) {
+        this.parcourDtoMapper = parcourDtoMapper;
 
 
-    @Override
+    }
+
+
+
     public Parcour saveOrUpdate(@RequestBody Parcour parcour) {
 
         return parcourRep.save(parcour);
     }
 
-    @Override
+
     public Parcour findById(Long id) {
         return parcourRep.findById(id).get();
     }
 
-    @Override
+
     public Boolean delete(Long id) {
         try {
             parcourRep.deleteById(id);
@@ -35,7 +46,7 @@ public class ParcourService implements ServicesCRUD<Parcour> {
         }
     }
 
-    @Override
+
     public Boolean deleteAll() {
         try {
             parcourRep.deleteAll();
@@ -45,8 +56,8 @@ public class ParcourService implements ServicesCRUD<Parcour> {
         }
     }
 
-    @Override
-    public List<Parcour> findAll() {
-        return parcourRep.findAll();
+
+    public List<ParcourDTO> findAll() {
+        return parcourRep.findAll().stream().map(parcourDtoMapper).collect(Collectors.toList());
     }
 }
