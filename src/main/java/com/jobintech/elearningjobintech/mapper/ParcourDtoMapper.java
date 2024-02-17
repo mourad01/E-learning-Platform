@@ -8,12 +8,19 @@ import java.util.function.Function;
 
 @Service
 public class ParcourDtoMapper implements Function<Parcour, ParcourDTO> {
+
+
+
     @Override
     public ParcourDTO apply(Parcour parcour) {
         return new ParcourDTO(
                 parcour.getId(),
                 parcour.getTitle(),
                 parcour.getDescription()
+
+
                );
     }
+
+
 }

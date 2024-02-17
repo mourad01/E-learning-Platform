@@ -1,6 +1,6 @@
 package com.jobintech.elearningjobintech.mapper;
 
-import com.jobintech.elearningjobintech.dto.UserDTO;
+import com.jobintech.elearningjobintech.dto.User.UserDTO;
 import com.jobintech.elearningjobintech.entities.Users;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,8 @@ public class UserDtoMapper implements Function<Users, UserDTO>{
                 users.getUsername(),
                 users.getEmail(),
                 users.getRole(),
-                users.getParcours());
+                users.getParcours().stream().map(new ParcourDtoMapper()).toList());
     }
+
+
 }

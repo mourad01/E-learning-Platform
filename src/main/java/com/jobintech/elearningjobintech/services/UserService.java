@@ -1,8 +1,10 @@
 package com.jobintech.elearningjobintech.services;
 
+import com.jobintech.elearningjobintech.dto.User.UserRegisteration;
 import com.jobintech.elearningjobintech.entities.Users;
-import com.jobintech.elearningjobintech.dto.UserDTO;
+import com.jobintech.elearningjobintech.dto.User.UserDTO;
 import com.jobintech.elearningjobintech.mapper.UserDtoMapper;
+import com.jobintech.elearningjobintech.mapper.UserRegistrartionMapper;
 import com.jobintech.elearningjobintech.repositories.IUserRepo;
 import org.springframework.stereotype.Service;
 
@@ -10,26 +12,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService  {
+public class UserService {
 
-    private final  IUserRepo userRepo;
+    private final IUserRepo userRepo;
     private final UserDtoMapper userDtoMapper;
+    private final UserRegistrartionMapper userRegistrartionMapper;
 
 
-    public UserService(IUserRepo userRepo, UserDtoMapper userDtoMapper) {
+    public UserService(IUserRepo userRepo, UserDtoMapper userDtoMapper, ParcourService parcourService, UserRegistrartionMapper userRegistrartionMapper) {
         this.userRepo = userRepo;
         this.userDtoMapper = userDtoMapper;
+
+        this.userRegistrartionMapper = userRegistrartionMapper;
     }
 
     public Users UpdateUser(Long id, Users users) {
         Users user = userRepo.findById(id).orElse(null);
-        if(user!=null){
-           users = user;
+        if (user != null) {
+            users = user;
         }
         return userRepo.save(users);
     }
-    public Users saveOrUpdate(Users users) {
-        return userRepo.save(users);
+
+    public Users saveOrUpdate(UserRegisteration userRegisteration) {
+
+        return userRepo.save(userRegistrartionMapper.apply(userRegisteration));
     }
 
 

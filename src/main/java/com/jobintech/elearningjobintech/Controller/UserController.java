@@ -1,7 +1,8 @@
 package com.jobintech.elearningjobintech.Controller;
 
+import com.jobintech.elearningjobintech.dto.User.UserRegisteration;
 import com.jobintech.elearningjobintech.entities.Users;
-import com.jobintech.elearningjobintech.dto.UserDTO;
+import com.jobintech.elearningjobintech.dto.User.UserDTO;
 import com.jobintech.elearningjobintech.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,9 +46,9 @@ public class UserController {
         return userService.UpdateUser(id,users);
     }
     @PostMapping ("/add")
-    public Users addUser(@RequestBody Users users){
+    public Users addUser(@RequestBody UserRegisteration userRegisteration){
 
-        return userService.saveOrUpdate(users);
+        return userService.saveOrUpdate(userRegisteration);
     }
 
 
