@@ -1,9 +1,12 @@
 package com.jobintech.elearningjobintech;
 
 import com.jobintech.elearningjobintech.entities.Parcour;
+import com.jobintech.elearningjobintech.entities.Steps;
 import com.jobintech.elearningjobintech.entities.Users;
 import com.jobintech.elearningjobintech.repositories.IParcourRep;
+import com.jobintech.elearningjobintech.repositories.IStepsRep;
 import com.jobintech.elearningjobintech.repositories.IUserRepo;
+import org.hamcrest.Condition;
 import org.junit.Test;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +28,7 @@ public class ELearningJobInTechApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(IParcourRep parcourRep, IUserRepo userRepo){
+    CommandLineRunner commandLineRunner(IParcourRep parcourRep, IUserRepo userRepo, IStepsRep stepsRep) {
         return args -> {
             List<Parcour> parcours = new ArrayList<>();
             parcours.add( Parcour.builder().title("parcour1").description("description1").build());
@@ -52,6 +55,10 @@ public class ELearningJobInTechApplication {
                 element.setUser(user2);
                 parcourRep.save(element);
             });
+            List<Steps> steps = new ArrayList<>();
+            steps.add(Steps.builder().title("step1").status("pending").description("description1").parcour(parcours.get(0)).build());
+            steps.add(Steps.builder().title("step2").status("done").description("description2").parcour(parcours.get(0)).build());
+            stepsRep.saveAll(steps);
 
 
 

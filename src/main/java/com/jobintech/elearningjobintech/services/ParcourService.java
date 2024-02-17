@@ -1,6 +1,7 @@
 package com.jobintech.elearningjobintech.services;
 
 import com.jobintech.elearningjobintech.dto.parcour.ParcourDTO;
+import com.jobintech.elearningjobintech.dto.parcour.ParcourRegistration;
 import com.jobintech.elearningjobintech.entities.Parcour;
 import com.jobintech.elearningjobintech.mapper.ParcourDtoMapper;
 import com.jobintech.elearningjobintech.repositories.IParcourRep;
@@ -25,14 +26,20 @@ public class ParcourService  {
 
 
 
-    public Parcour saveOrUpdate(@RequestBody Parcour parcour) {
+    public Parcour save(ParcourRegistration parcour) {
+        Parcour parcour1 = new Parcour(
+                parcour.title(),
+                parcour.description(),
+                parcour.user()
+        );
 
-        return parcourRep.save(parcour);
+        return parcourRep.save(parcour1);
     }
 
 
-    public Parcour findById(Long id) {
-        return parcourRep.findById(id).get();
+    public ParcourDTO findById(Long id) {
+
+        return parcourRep.findById(id).map(parcourDtoMapper).orElse(null);
     }
 
 
@@ -58,5 +65,16 @@ public class ParcourService  {
 
     public List<ParcourDTO> findAll() {
         return parcourRep.findAll().stream().map(parcourDtoMapper).collect(Collectors.toList());
+    }
+
+    public Parcour Update(Long id, ParcourRegistration parcour) {
+        Parcour parcour1 = parcourRep.getReferenceById(id);
+        if (parcour1 != null) {
+            parcour1.setTitle(parcour.title());
+            parcour1.setDescription(parcour.description());
+            parcour1.setUser(parcour.user());
+            return parcourRep.save(parcour1);
+        } else
+            return null;
     }
 }

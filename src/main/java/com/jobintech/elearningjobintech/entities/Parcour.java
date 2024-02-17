@@ -41,4 +41,10 @@ public class Parcour {
         this.title = title;
         this.description = description;
     }
+
+    public Parcour(String title, String description, Users user) {
+        this.title = title;
+        this.description = description;
+        this.user = user;
+    }
 }

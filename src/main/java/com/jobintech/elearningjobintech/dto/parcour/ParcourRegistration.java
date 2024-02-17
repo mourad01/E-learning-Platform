@@ -1,5 +1,7 @@
 package com.jobintech.elearningjobintech.dto.parcour;
 
-public record ParcourRegistration(Long id , String title, String description ) {
+import com.jobintech.elearningjobintech.entities.Users;
+
+public record ParcourRegistration(String title, String description, Users user) {
 
 }

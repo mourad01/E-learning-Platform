@@ -16,9 +16,8 @@ public class ParcourDtoMapper implements Function<Parcour, ParcourDTO> {
         return new ParcourDTO(
                 parcour.getId(),
                 parcour.getTitle(),
-                parcour.getDescription()
-
-
+                parcour.getDescription(),
+                parcour.getSteps().stream().map(new StepsDtoMapper()).toList()
                );
     }
 
