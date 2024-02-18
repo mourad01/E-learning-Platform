@@ -2,8 +2,7 @@ package com.jobintech.elearningjobintech;
 
 import com.jobintech.elearningjobintech.entities.*;
 import com.jobintech.elearningjobintech.repositories.*;
-import org.hamcrest.Condition;
-import org.junit.Test;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
