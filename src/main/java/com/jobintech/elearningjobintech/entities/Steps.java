@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +29,11 @@ public class Steps {
     name = "parcour-user-FK",
     nullable = false)
     private Parcour parcour;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "steps")
+    private List<Learning> learnings = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "steps")
+    private List<Doing> doing = new ArrayList<>();
 
     public Steps(String title, String description, String status) {
         this.title = title;

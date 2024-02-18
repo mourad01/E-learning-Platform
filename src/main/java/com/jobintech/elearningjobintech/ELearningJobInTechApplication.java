@@ -1,11 +1,7 @@
 package com.jobintech.elearningjobintech;
 
-import com.jobintech.elearningjobintech.entities.Parcour;
-import com.jobintech.elearningjobintech.entities.Steps;
-import com.jobintech.elearningjobintech.entities.Users;
-import com.jobintech.elearningjobintech.repositories.IParcourRep;
-import com.jobintech.elearningjobintech.repositories.IStepsRep;
-import com.jobintech.elearningjobintech.repositories.IUserRepo;
+import com.jobintech.elearningjobintech.entities.*;
+import com.jobintech.elearningjobintech.repositories.*;
 import org.hamcrest.Condition;
 import org.junit.Test;
 import org.springframework.boot.CommandLineRunner;
@@ -28,7 +24,8 @@ public class ELearningJobInTechApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(IParcourRep parcourRep, IUserRepo userRepo, IStepsRep stepsRep) {
+    CommandLineRunner commandLineRunner(IParcourRep parcourRep, IUserRepo userRepo, IStepsRep stepsRep,
+    ILearningRep learningRep, IDoingRep doingRep) {
         return args -> {
             List<Parcour> parcours = new ArrayList<>();
             parcours.add( Parcour.builder().title("parcour1").description("description1").build());
@@ -59,6 +56,18 @@ public class ELearningJobInTechApplication {
             steps.add(Steps.builder().title("step1").status("pending").description("description1").parcour(parcours.get(0)).build());
             steps.add(Steps.builder().title("step2").status("done").description("description2").parcour(parcours.get(0)).build());
             stepsRep.saveAll(steps);
+
+            List<Learning> learnings = new ArrayList<>();
+            learnings.add(Learning.builder().title("learning1").steps(steps.get(0)).build());
+            learnings.add(Learning.builder().title("learning2").steps(steps.get(0)).build());
+            learningRep.saveAll(learnings);
+
+            List<Doing> doings = new ArrayList<>();
+            doings.add(Doing.builder().title("doing1").status("prnding").description("des").steps(steps.get(0)).build());
+            doings.add(Doing.builder().title("doing2").status("done").description("des").steps(steps.get(0)).build());
+            doingRep.saveAll(doings);
+
+
 
 
 
