@@ -1,5 +1,6 @@
 package com.jobintech.elearningjobintech.mapper;
 
+import com.jobintech.elearningjobintech.dto.User.UserDTO;
 import com.jobintech.elearningjobintech.dto.parcour.ParcourDTO;
 import com.jobintech.elearningjobintech.entities.Parcour;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,16 @@ public class ParcourDtoMapper implements Function<Parcour, ParcourDTO> {
                 parcour.getId(),
                 parcour.getTitle(),
                 parcour.getDescription(),
-                parcour.getSteps().stream().map(new StepsDtoMapper()).toList()
-               );
+                parcour.getSteps().stream().map(new StepsDtoMapper()).toList(),
+                new UserDTO(
+                        parcour.getUser().getId(),
+                        parcour.getUser().getUsername(),
+                        parcour.getUser().getEmail(),
+                        parcour.getUser().getRole(),
+                       null
+                )
+        );
+
     }
 
 

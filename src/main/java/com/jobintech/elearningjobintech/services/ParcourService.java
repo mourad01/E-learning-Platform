@@ -3,6 +3,7 @@ package com.jobintech.elearningjobintech.services;
 import com.jobintech.elearningjobintech.dto.parcour.ParcourDTO;
 import com.jobintech.elearningjobintech.dto.parcour.ParcourRegistration;
 import com.jobintech.elearningjobintech.entities.Parcour;
+import com.jobintech.elearningjobintech.exceptions.ResourceNotFound;
 import com.jobintech.elearningjobintech.mapper.ParcourDtoMapper;
 import com.jobintech.elearningjobintech.repositories.IParcourRep;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,8 @@ public class ParcourService  {
 
     public ParcourDTO findById(Long id) {
 
-        return parcourRep.findById(id).map(parcourDtoMapper).orElse(null);
+        return parcourRep.findById(id).map(parcourDtoMapper).orElseThrow(()->
+                new ResourceNotFound("Parcour %s not found".formatted(id)));
     }
 
 

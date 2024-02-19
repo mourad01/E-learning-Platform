@@ -3,6 +3,7 @@ package com.jobintech.elearningjobintech.services;
 import com.jobintech.elearningjobintech.dto.Steps.StepsDTO;
 import com.jobintech.elearningjobintech.dto.Steps.StepsRegistration;
 import com.jobintech.elearningjobintech.entities.Steps;
+import com.jobintech.elearningjobintech.exceptions.ResourceNotFound;
 import com.jobintech.elearningjobintech.mapper.StepsDtoMapper;
 import com.jobintech.elearningjobintech.repositories.IStepsRep;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,9 @@ public class StepsService {
         return stepsRep.findAll().stream().map(stepsDtoMapper).collect(Collectors.toList());
     }
     public StepsDTO findById(Long id) {
-        return stepsRep.findById(id).map(stepsDtoMapper).orElseThrow();
+        return stepsRep.findById(id).map(stepsDtoMapper).orElseThrow(
+                ()-> new ResourceNotFound("Step %s not found".formatted(id) )
+        );
     }
 
     public Steps save(StepsRegistration stepsRegistration) {

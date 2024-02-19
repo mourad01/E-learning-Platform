@@ -2,6 +2,7 @@ package com.jobintech.elearningjobintech.services;
 
 import com.jobintech.elearningjobintech.dto.doing.DoingDTO;
 import com.jobintech.elearningjobintech.entities.Doing;
+import com.jobintech.elearningjobintech.exceptions.ResourceNotFound;
 import com.jobintech.elearningjobintech.mapper.DoingDtoMapper;
 import com.jobintech.elearningjobintech.repositories.IDoingRep;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,10 @@ public class DoingService {
     }
 
     public DoingDTO getDoingById(Long id){
-        return doingRep.findById(id).map(doingDtoMapper).orElse(null);
+        return doingRep.findById(id).map(doingDtoMapper).orElseThrow(
+                ()-> new ResourceNotFound("Doing %s not found".formatted(id))
+
+        );
     }
 
     public Doing saveDoing(DoingDTO doingDTO){

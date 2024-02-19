@@ -2,6 +2,7 @@ package com.jobintech.elearningjobintech.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,11 +26,14 @@ public class Steps {
     private String status;
     @ManyToOne
     @JsonIgnoreProperties("steps")
+    @JsonManagedReference
     @JoinColumn(referencedColumnName = "id",
     name = "parcour-user-FK",
     nullable = false)
     private Parcour parcour;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "steps")
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "steps")
     private List<Learning> learnings = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "steps")

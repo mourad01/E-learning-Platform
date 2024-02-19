@@ -4,6 +4,7 @@ import com.jobintech.elearningjobintech.dto.User.UserRegisteration;
 import com.jobintech.elearningjobintech.dto.User.UserUpdateReq;
 import com.jobintech.elearningjobintech.entities.Users;
 import com.jobintech.elearningjobintech.dto.User.UserDTO;
+import com.jobintech.elearningjobintech.exceptions.ResourceNotFound;
 import com.jobintech.elearningjobintech.mapper.UserDtoMapper;
 import com.jobintech.elearningjobintech.mapper.UserRegistrartionMapper;
 import com.jobintech.elearningjobintech.repositories.IUserRepo;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.lang.String.format;
 
 @Service
 public class UserService {
@@ -43,7 +46,9 @@ public class UserService {
 
 
     public UserDTO findById(Long id) {
-        return userRepo.findById(id).map(userDtoMapper).orElse(null);
+
+        return userRepo.findById(id).map(userDtoMapper).orElseThrow(()->
+                new ResourceNotFound("User %s not found".formatted(id)));
     }
 
 

@@ -2,6 +2,7 @@ package com.jobintech.elearningjobintech.services;
 
 import com.jobintech.elearningjobintech.dto.learning.LearningDTO;
 import com.jobintech.elearningjobintech.entities.Learning;
+import com.jobintech.elearningjobintech.exceptions.ResourceNotFound;
 import com.jobintech.elearningjobintech.mapper.LearningDtoMapper;
 import com.jobintech.elearningjobintech.repositories.ILearningRep;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,10 @@ public class LeraningService {
     }
 
     public LearningDTO getLearningById(Long id){
-        return iLearningRep.findById(id).map(learningDtoMapper).orElse(null);
+        return iLearningRep.findById(id).map(learningDtoMapper).orElseThrow(
+                ()-> new ResourceNotFound("Learning %s not found".formatted(id))
+
+        );
     }
 
     public Learning saveLearning(LearningDTO learningDTO){
