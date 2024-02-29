@@ -74,7 +74,7 @@ public class ParcourService  {
         if (parcour1 != null) {
             parcour1.setTitle(parcour.title());
             parcour1.setDescription(parcour.description());
-            parcour1.setUser(parcour.user());
+            parcour1.setUsers(parcour.user());
             return parcourRep.save(parcour1);
         } else
             return null;

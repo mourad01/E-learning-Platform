@@ -1,6 +1,8 @@
 package com.jobintech.elearningjobintech.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,10 +27,17 @@ public class Users {
     private String email;
     private String role;
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
+    @JsonIgnoreProperties("users")
+
+    @ManyToMany(
+            cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY)
+    @JoinTable(name = "user_parcour",
+            joinColumns = @JoinColumn(name = "user_id",
+                    foreignKey= @ForeignKey(name = "enrollment_USER_id_FK")),
+
+            inverseJoinColumns = @JoinColumn(name = "parcour_id",
+                    foreignKey= @ForeignKey(name = "enrollment_PARCOUR_id_FK")))
     private List<Parcour> parcours = new ArrayList<>();
 
     public Users(String username, String password, String email, String role) {
@@ -36,6 +45,13 @@ public class Users {
         this.password = password;
         this.email = email;
         this.role = role;
+    }
+    public Users(Long id,String username,  String email, String role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.id = id;
     }
     public Users(String username, String password, String email, String role, List<Parcour> parcours) {
         this.username = username;
@@ -45,13 +61,6 @@ public class Users {
         this.parcours = parcours;
     }
 
-    public void addParcour(Parcour parcour) {
-        if (!this.parcours.contains(parcour)){
-            this.parcours.add(parcour);
-            parcour.setUser(this);
-        }
-
-    }
 
 
 }

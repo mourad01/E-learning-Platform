@@ -4,7 +4,9 @@ import com.jobintech.elearningjobintech.dto.User.UserRegisteration;
 import com.jobintech.elearningjobintech.dto.User.UserUpdateReq;
 import com.jobintech.elearningjobintech.entities.Users;
 import com.jobintech.elearningjobintech.dto.User.UserDTO;
+import com.jobintech.elearningjobintech.jwt.JWTUtil;
 import com.jobintech.elearningjobintech.services.UserService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,10 @@ public class UserController {
 
 
    private final  UserService userService;
+    private final JWTUtil jwtUtil;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService , JWTUtil jwtUtil){
+        this.jwtUtil = jwtUtil;
         this.userService = userService;
     }
 
@@ -47,9 +51,11 @@ public class UserController {
         return userService.UpdateUser(id,users);
     }
     @PostMapping ("/add")
-    public Users addUser(@RequestBody UserRegisteration userRegisteration){
+    public ResponseEntity<?> addUser(@RequestBody UserRegisteration userRegisteration){
+        ;
+       // String jwt = jwtUtil.issueToken(userRegisteration.username(), "ROLE_USER");
 
-        return userService.saveOrUpdate(userRegisteration);
+        return new ResponseEntity<>(userService.saveOrUpdate(userRegisteration), HttpStatus.CREATED);
     }
 
 

@@ -16,7 +16,8 @@ public class UserRegistrartionMapper implements Function<UserRegisteration, User
                 userRegisteration.username(),
                 userRegisteration.Password(),
                 userRegisteration.email(),
-                userRegisteration.role()
+                userRegisteration.role(),
+                userRegisteration.parcours()
         );
     }
 }

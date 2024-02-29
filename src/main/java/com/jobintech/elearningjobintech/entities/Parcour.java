@@ -23,14 +23,11 @@ public class Parcour {
     private Long id;
     private String title;
     private String description;
-    @ManyToOne
-    @JsonIgnoreProperties("parcours")
-    @JoinColumn(name = "user_id",
-            nullable = false,
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "FK_USER_PARCOUR")
+    @ManyToMany(
+            mappedBy = "parcours"
     )
-    private Users user;
+    @JsonIgnoreProperties("parcours")
+    private List<Users> users = new ArrayList<>();
    @JsonIgnore
     @OneToMany(mappedBy = "parcour",
             cascade = CascadeType.ALL,
@@ -43,10 +40,11 @@ public class Parcour {
         this.description = description;
     }
 
-    public Parcour(String title, String description, Users user) {
+
+    public Parcour(String title, String description, List<Users> users) {
         this.title = title;
         this.description = description;
-        this.user = user;
+        this.users = users;
     }
 
     public Parcour(Long id, String title, String description) {

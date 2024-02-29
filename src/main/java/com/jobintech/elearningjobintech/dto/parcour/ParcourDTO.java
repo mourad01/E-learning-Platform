@@ -11,9 +11,11 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record ParcourDTO(Long id , String title, String description ,
-
-                         List<StepsDTO> stepsDTO,
-                         UserDTO userDTO) {
+public record ParcourDTO(
+        Long id,
+        String title,
+        String description,
+        List<StepsDTO> stepsDTO,
+        List<Users> user ) {
 
 }

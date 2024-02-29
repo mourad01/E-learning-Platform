@@ -1,4 +1,8 @@
 package com.jobintech.elearningjobintech.dto.User;
 
-public record UserUpdateReq(String username ,  String role) {
+import com.jobintech.elearningjobintech.entities.Parcour;
+
+import java.util.List;
+
+public record UserUpdateReq(String username , String role, List<Parcour> parcours) {
 }

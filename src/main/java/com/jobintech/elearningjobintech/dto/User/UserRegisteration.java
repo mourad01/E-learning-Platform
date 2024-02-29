@@ -4,5 +4,9 @@ import com.jobintech.elearningjobintech.entities.Parcour;
 
 import java.util.List;
 
-public record UserRegisteration(String username , String Password, String email , String role) {
+public record UserRegisteration(String username ,
+                                String Password,
+                                String email ,
+                                String role ,
+                                List<Parcour> parcours) {
 }
